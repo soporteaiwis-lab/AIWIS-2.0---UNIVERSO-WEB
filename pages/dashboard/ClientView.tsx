@@ -72,9 +72,20 @@ const ClientView: React.FC = () => {
                     </div>
                   )}
 
-                  <button className="w-full mt-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-cyan-600 text-white py-3 rounded-lg transition-colors font-medium group-hover:bg-cyan-600">
-                    Iniciar Aplicación <ExternalLink className="w-4 h-4" />
-                  </button>
+                  {product.url ? (
+                    <a 
+                      href={product.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full mt-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-cyan-600 text-white py-3 rounded-lg transition-colors font-medium group-hover:bg-cyan-600"
+                    >
+                      Iniciar Aplicación <ExternalLink className="w-4 h-4" />
+                    </a>
+                  ) : (
+                    <button disabled className="w-full mt-auto flex items-center justify-center gap-2 bg-slate-800/50 text-slate-500 py-3 rounded-lg font-medium cursor-not-allowed">
+                       Próximamente
+                    </button>
+                  )}
                 </div>
               </motion.div>
             ))}

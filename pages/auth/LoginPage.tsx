@@ -7,8 +7,9 @@ const LoginPage: React.FC = () => {
   const { login, loginWithGoogle, error } = useAuth();
   const navigate = useNavigate();
   
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // PRE-LLENADO PARA ACCESO MASTER ROOT POR DEFECTO
+  const [email, setEmail] = useState('aiwis@aiwis.ai');
+  const [password, setPassword] = useState('1234');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -84,7 +85,7 @@ const LoginPage: React.FC = () => {
                 disabled={isLoading}
                 className={`w-full flex items-center justify-center py-3 px-4 rounded-lg text-white font-semibold bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 focus:ring-offset-slate-900 transition-all transform ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:scale-[1.02]'}`}
               >
-                {isLoading ? 'Autenticando...' : 'Iniciar Sesión'} <ArrowRight className="ml-2 w-4 h-4" />
+                {isLoading ? 'Autenticando...' : 'Acceder como Master Root'} <ArrowRight className="ml-2 w-4 h-4" />
               </button>
             </form>
 
@@ -130,12 +131,12 @@ const LoginPage: React.FC = () => {
             </div>
             
             {/* Demo Credentials Hint */}
-            <div className="mt-6 text-center">
-                 <p className="text-xs text-slate-600">
-                    Demo Admin: aiwis@aiwis.ai / 1234
+            <div className="mt-6 text-center space-y-1">
+                 <p className="text-xs text-cyan-400 font-bold bg-cyan-900/20 py-1 px-2 rounded inline-block border border-cyan-800/50">
+                    MASTER ROOT PRE-CARGADO
                  </p>
                  <p className="text-xs text-slate-600">
-                    Demo Cliente: demo@cliente.cl / 1234
+                    Usuario: aiwis@aiwis.ai (CEO)
                  </p>
             </div>
           </div>

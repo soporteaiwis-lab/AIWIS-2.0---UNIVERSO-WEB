@@ -7,6 +7,7 @@ export interface Product {
   description: string;
   features?: string[];
   imageUrl?: string;
+  url?: string; // Nuevo campo para enlace externo
   status: 'active' | 'beta' | 'development';
 }
 

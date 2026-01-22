@@ -1,14 +1,14 @@
 import React from 'react';
 import { users, products } from '../../data/mockData';
-import { Users, Box, Activity, DollarSign, Trash2, Edit, Shield, Server } from 'lucide-react';
+import { Users, Box, Activity, DollarSign, Trash2, Edit, Shield, Server, ExternalLink } from 'lucide-react';
 
 const AdminView: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-white">Panel de Administración</h1>
-        <p className="text-slate-400">Visión global del ecosistema AIWIS.</p>
+        <h1 className="text-3xl font-bold text-white">Panel Master Root</h1>
+        <p className="text-slate-400">Control total del ecosistema AIWIS.</p>
       </div>
 
       {/* Metrics Cards */}
@@ -47,6 +47,47 @@ const AdminView: React.FC = () => {
           </div>
           <p className="text-3xl font-bold text-white">$4.2M</p>
           <span className="text-xs text-green-400">ARR Estimado</span>
+        </div>
+      </div>
+
+      {/* All Products List */}
+      <div className="grid grid-cols-1 gap-6">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-white mb-4">Catálogo de Productos y Accesos Rápidos</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {products.map(product => (
+                    <div key={product.id} className="flex flex-col md:flex-row items-start md:items-center gap-4 p-4 bg-slate-950/50 rounded-lg border border-slate-800 hover:border-cyan-500/30 transition-colors">
+                        <div className="p-3 bg-slate-900 rounded-lg border border-slate-700">
+                            <Server className="w-6 h-6 text-slate-400" />
+                        </div>
+                        <div className="flex-grow">
+                            <h4 className="text-white font-medium">{product.name}</h4>
+                            <p className="text-sm text-slate-500 line-clamp-1">{product.tagline}</p>
+                            <div className="mt-2 flex gap-2">
+                                <span className={`text-xs px-2 py-1 rounded text-slate-300 border ${
+                                    product.status === 'active' ? 'bg-green-900/20 border-green-900/50 text-green-400' : 'bg-slate-800 border-slate-700'
+                                }`}>
+                                    {product.status.toUpperCase()}
+                                </span>
+                            </div>
+                        </div>
+                        <div className="mt-4 md:mt-0 w-full md:w-auto">
+                            {product.url ? (
+                                <a 
+                                    href={product.url} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center gap-2 px-4 py-2 bg-slate-800 hover:bg-cyan-600 text-white rounded-lg transition-colors text-sm font-medium w-full md:w-auto"
+                                >
+                                    Abrir App <ExternalLink className="w-4 h-4" />
+                                </a>
+                            ) : (
+                                <span className="text-xs text-slate-600 italic px-2">Sin enlace</span>
+                            )}
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
       </div>
 
@@ -102,45 +143,6 @@ const AdminView: React.FC = () => {
               ))}
             </tbody>
           </table>
-        </div>
-      </div>
-
-      {/* All Products List */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-white mb-4">Catálogo de Productos</h3>
-            <div className="space-y-4">
-                {products.map(product => (
-                    <div key={product.id} className="flex items-start gap-4 p-4 bg-slate-950/50 rounded-lg border border-slate-800">
-                        <div className="p-3 bg-slate-900 rounded-lg border border-slate-700">
-                            <Server className="w-6 h-6 text-slate-400" />
-                        </div>
-                        <div>
-                            <h4 className="text-white font-medium">{product.name}</h4>
-                            <p className="text-sm text-slate-500 line-clamp-1">{product.tagline}</p>
-                            <div className="mt-2 flex gap-2">
-                                <span className="text-xs px-2 py-1 bg-slate-800 rounded text-slate-300 border border-slate-700">
-                                    {product.status}
-                                </span>
-                                <span className="text-xs px-2 py-1 bg-slate-800 rounded text-slate-300 border border-slate-700">
-                                    ID: {product.id}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </div>
-        
-        {/* Placeholder for System Logs or Recent Activity */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-white mb-4">Actividad Reciente</h3>
-            <div className="space-y-4 text-sm text-slate-400">
-                <p className="flex items-center gap-2"><span className="w-2 h-2 bg-green-500 rounded-full"></span> Nuevo usuario registrado: Cliente Demo</p>
-                <p className="flex items-center gap-2"><span className="w-2 h-2 bg-blue-500 rounded-full"></span> Backup del sistema completado</p>
-                <p className="flex items-center gap-2"><span className="w-2 h-2 bg-yellow-500 rounded-full"></span> Alerta: Uso de memoria al 75% en nodo-3</p>
-                <p className="flex items-center gap-2"><span className="w-2 h-2 bg-purple-500 rounded-full"></span> Despliegue de Edu Studio v2.1 exitoso</p>
-            </div>
         </div>
       </div>
     </div>
