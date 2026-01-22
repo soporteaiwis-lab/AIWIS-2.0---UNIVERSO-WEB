@@ -1,17 +1,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Music, Cpu, BarChart3, Database, Layers, CheckCircle } from 'lucide-react';
+import { ArrowRight, Music, Cpu, CheckCircle, ExternalLink, Lock, Shield, Server, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import NeuralBackground from '../../components/NeuralBackground';
+import { companies, products } from '../../data/mockData';
 
 const Home: React.FC = () => {
+  // Filtrar productos reales (Aiwis IP) para la sección de innovación
+  // Excluimos explícitamente cualquier cosa que parezca "Portal Corporativo" o "SimpleData" si estuviera mal clasificado
+  const innovationProducts = products.filter(p => 
+    (p.category === 'education' || p.category === 'creative') && p.status !== 'development'
+  ).slice(0, 3); // Top 3 productos insignia
+
+  // Filtrar Partners (Clientes) para la sección de Ecosistema
+  const partners = companies.filter(c => c.id !== 'aiwis-corp');
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
+      transition: { staggerChildren: 0.2 }
     }
   };
 
@@ -22,7 +30,6 @@ const Home: React.FC = () => {
 
   return (
     <div className="relative min-h-screen">
-      {/* Fondo de Red Neuronal */}
       <NeuralBackground />
 
       {/* --- HERO SECTION --- */}
@@ -37,7 +44,7 @@ const Home: React.FC = () => {
           className="mb-6 inline-flex items-center px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-900/20 backdrop-blur-sm"
         >
           <span className="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"></span>
-          <span className="text-sm text-cyan-300 tracking-wide font-medium">PLATAFORMA 2.0 ACTIVA</span>
+          <span className="text-sm text-cyan-300 tracking-wide font-medium uppercase">Ecosistema AIWIS 2.0</span>
         </motion.div>
 
         <motion.h1 
@@ -58,8 +65,7 @@ const Home: React.FC = () => {
           transition={{ delay: 0.4 }}
           className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed"
         >
-          No solo creamos software. Diseñamos ecosistemas inteligentes donde la educación, 
-          la creatividad y los datos convergen para potenciar el talento humano.
+          Fusionamos pedagogía, creatividad y análisis de datos para construir tecnología con propósito humano.
         </motion.p>
 
         <motion.div 
@@ -74,25 +80,25 @@ const Home: React.FC = () => {
           >
             <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
             <span className="group-hover:text-white transition-colors flex items-center gap-2">
-              Ingresar al Ecosistema <ArrowRight className="w-5 h-5" />
+              <Lock className="w-4 h-4" /> Acceso Plataforma
             </span>
           </Link>
-          <Link 
-            to="/contacto"
+          <a
+            href="#innovation"
             className="px-8 py-4 border border-slate-700 text-slate-300 font-medium rounded-lg hover:bg-slate-800 transition-all hover:text-white"
           >
-            Hablar con Consultoría
-          </Link>
+            Explorar Soluciones
+          </a>
         </motion.div>
       </section>
 
-      {/* --- INNOVATION SECTION (Products) --- */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* --- INNOVATION SECTION (Products Only) --- */}
+      <section id="innovation" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Innovación en Marcha</h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
-              Nuestras soluciones insignia redefinen los límites entre la creatividad humana y el poder computacional.
+              Nuestras soluciones tecnológicas insignia para la educación y la industria creativa.
             </p>
           </div>
 
@@ -101,148 +107,130 @@ const Home: React.FC = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto"
           >
-            {/* Card 1: ArmonIA */}
-            <motion.div variants={itemVariants} className="group relative bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-colors duration-500">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-              <div className="p-8">
-                <div className="w-14 h-14 bg-purple-900/30 rounded-xl flex items-center justify-center mb-6 text-purple-400 group-hover:text-white group-hover:bg-purple-600 transition-all">
-                  <Music className="w-8 h-8" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">ArmonIA</h3>
-                <p className="text-sm font-medium text-purple-400 mb-4">Copiloto Musical Experimental</p>
-                <p className="text-slate-400 mb-6 leading-relaxed">
-                  Más que un generador, un colaborador. Integra Suno AI y análisis espectral para que músicos exploren nuevos paisajes sonoros sin perder su esencia creativa.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center text-sm text-slate-500">
-                    <CheckCircle className="w-4 h-4 mr-2 text-purple-500" /> Análisis espectral en tiempo real
-                  </li>
-                  <li className="flex items-center text-sm text-slate-500">
-                    <CheckCircle className="w-4 h-4 mr-2 text-purple-500" /> Generación melódica asistida
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
+            {innovationProducts.map(product => (
+               <motion.div key={product.id} variants={itemVariants} className="group relative bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-colors duration-500 flex flex-col">
+                 <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ${product.category === 'creative' ? 'from-purple-500 to-pink-500' : 'from-cyan-500 to-blue-500'}`}></div>
+                 
+                 <div className="p-8 flex-grow">
+                   <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-all ${
+                     product.category === 'creative' 
+                       ? 'bg-purple-900/30 text-purple-400 group-hover:bg-purple-600 group-hover:text-white' 
+                       : 'bg-cyan-900/30 text-cyan-400 group-hover:bg-cyan-600 group-hover:text-white'
+                   }`}>
+                     {product.category === 'creative' ? <Music className="w-8 h-8" /> : <Cpu className="w-8 h-8" />}
+                   </div>
+                   
+                   <h3 className="text-2xl font-bold text-white mb-2">{product.name}</h3>
+                   <p className={`text-sm font-medium mb-4 ${product.category === 'creative' ? 'text-purple-400' : 'text-cyan-400'}`}>
+                      {product.tagline}
+                   </p>
+                   <p className="text-slate-400 mb-6 leading-relaxed">
+                     {product.description}
+                   </p>
+                   
+                   {product.features && (
+                     <ul className="space-y-2 mb-6">
+                       {product.features.slice(0, 2).map((feat, i) => (
+                         <li key={i} className="flex items-center text-sm text-slate-500">
+                           <CheckCircle className={`w-4 h-4 mr-2 ${product.category === 'creative' ? 'text-purple-500' : 'text-cyan-500'}`} /> 
+                           {feat}
+                         </li>
+                       ))}
+                     </ul>
+                   )}
+                 </div>
 
-            {/* Card 2: Edu Studio Labs */}
-            <motion.div variants={itemVariants} className="group relative bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-colors duration-500">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-              <div className="p-8">
-                <div className="w-14 h-14 bg-cyan-900/30 rounded-xl flex items-center justify-center mb-6 text-cyan-400 group-hover:text-white group-hover:bg-cyan-600 transition-all">
-                  <Cpu className="w-8 h-8" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Edu Studio Labs</h3>
-                <p className="text-sm font-medium text-cyan-400 mb-4">DAW Educativo Inteligente</p>
-                <p className="text-slate-400 mb-6 leading-relaxed">
-                  Transformamos el aula de música. Un entorno digital adaptativo (Explorer, Maker, Pro) diseñado pedagógicamente para despertar la curiosidad tecnológica.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center text-sm text-slate-500">
-                    <CheckCircle className="w-4 h-4 mr-2 text-cyan-500" /> Niveles de complejidad adaptativa
-                  </li>
-                  <li className="flex items-center text-sm text-slate-500">
-                    <CheckCircle className="w-4 h-4 mr-2 text-cyan-500" /> Gestión de aula integrada
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
-
-            {/* Card 3: SimpleData */}
-            <motion.div variants={itemVariants} className="group relative bg-slate-900/40 backdrop-blur-md border border-slate-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-colors duration-500">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-orange-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-              <div className="p-8">
-                <div className="w-14 h-14 bg-yellow-900/30 rounded-xl flex items-center justify-center mb-6 text-yellow-400 group-hover:text-white group-hover:bg-yellow-600 transition-all">
-                  <BarChart3 className="w-8 h-8" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">SimpleData</h3>
-                <p className="text-sm font-medium text-yellow-400 mb-4">Inteligencia Corporativa</p>
-                <p className="text-slate-400 mb-6 leading-relaxed">
-                  Convertimos el caos de datos en claridad estratégica. Dashboards ejecutivos y análisis predictivo para la toma de decisiones basada en evidencia.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center text-sm text-slate-500">
-                    <CheckCircle className="w-4 h-4 mr-2 text-yellow-500" /> Reportes automatizados
-                  </li>
-                  <li className="flex items-center text-sm text-slate-500">
-                    <CheckCircle className="w-4 h-4 mr-2 text-yellow-500" /> Visualización de datos en tiempo real
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
+                 {product.url && (
+                    <div className="p-6 pt-0 mt-auto">
+                        <a 
+                            href={product.url} 
+                            target="_blank" 
+                            rel="noreferrer"
+                            className="inline-flex items-center text-sm font-bold text-slate-300 hover:text-white transition-colors"
+                        >
+                            Ver Demo <ExternalLink className="ml-2 w-4 h-4" />
+                        </a>
+                    </div>
+                 )}
+               </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
 
-      {/* --- METHODOLOGY SECTION --- */}
-      <section className="py-24 bg-slate-950/50 border-t border-slate-900 relative z-10">
+      {/* --- PARTNERS & CLIENT ECOSYSTEM SECTION (The Fix) --- */}
+      <section className="py-24 bg-slate-950 border-y border-slate-900 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Nuestra Metodología</h2>
-              <p className="text-slate-400 text-lg mb-8">
-                No vendemos software "enlatado". Implementamos un proceso consultivo profundo para asegurar que la tecnología sirva al propósito de tu organización.
-              </p>
-              
-              <div className="space-y-8">
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-cyan-400 font-bold border border-slate-700">1</div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">Diagnóstico Estratégico</h3>
-                    <p className="text-slate-500">Analizamos los flujos de trabajo actuales y detectamos dónde la IA aporta valor real.</p>
-                  </div>
+            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <div className="flex items-center gap-2 mb-4">
+                        <Shield className="w-6 h-6 text-green-500" />
+                        <span className="text-green-500 font-bold uppercase tracking-widest text-xs">Acceso Corporativo</span>
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-white">Ecosistema de Partners</h2>
+                    <p className="text-slate-400 mt-2 max-w-xl">
+                        Empresas e instituciones que confían en Aiwis para su transformación digital. Acceso exclusivo a portales privados.
+                    </p>
                 </div>
-                
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-cyan-400 font-bold border border-slate-700">2</div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">Arquitectura Modular</h3>
-                    <p className="text-slate-500">Diseñamos soluciones escalables. Empieza pequeño, crece rápido. Sin deuda técnica.</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-cyan-400 font-bold border border-slate-700">3</div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">Implementación y Acompañamiento</h3>
-                    <p className="text-slate-500">La tecnología es fácil, el cambio cultural es difícil. Te acompañamos en la adopción.</p>
-                  </div>
-                </div>
-              </div>
+                <Link to="/login" className="px-6 py-3 bg-slate-900 border border-slate-700 text-white rounded-lg hover:bg-slate-800 transition-colors flex items-center gap-2 font-medium">
+                    <Lock className="w-4 h-4 text-slate-500" /> Área de Clientes
+                </Link>
             </div>
 
-            <div className="relative">
-              {/* Abstract Visual Representation of Process */}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-3xl blur-3xl -z-10"></div>
-              <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 relative overflow-hidden">
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 flex flex-col items-center justify-center aspect-square hover:border-cyan-500/30 transition-colors">
-                        <Database className="w-10 h-10 text-cyan-500 mb-3" />
-                        <span className="text-slate-300 font-medium">Data</span>
-                    </div>
-                    <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 flex flex-col items-center justify-center aspect-square hover:border-purple-500/30 transition-colors mt-8">
-                        <Layers className="w-10 h-10 text-purple-500 mb-3" />
-                        <span className="text-slate-300 font-medium">Modelos</span>
-                    </div>
-                    <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 flex flex-col items-center justify-center aspect-square hover:border-blue-500/30 transition-colors -mt-8">
-                        <Cpu className="w-10 h-10 text-blue-500 mb-3" />
-                        <span className="text-slate-300 font-medium">Procesamiento</span>
-                    </div>
-                    <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 flex flex-col items-center justify-center aspect-square hover:border-green-500/30 transition-colors">
-                        <BarChart3 className="w-10 h-10 text-green-500 mb-3" />
-                        <span className="text-slate-300 font-medium">Insights</span>
-                    </div>
-                </div>
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {partners.map(client => (
+                    <motion.div 
+                        key={client.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="bg-slate-900/50 border border-slate-800 rounded-xl p-6 hover:border-slate-600 transition-all group"
+                    >
+                        <div className="flex justify-between items-start mb-6">
+                            <div className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center text-white font-bold text-xl border border-slate-700 group-hover:border-slate-500 transition-colors">
+                                {client.logo || client.name.charAt(0)}
+                            </div>
+                            <div className="px-2 py-1 bg-slate-950 rounded border border-slate-800 text-[10px] uppercase text-slate-500 font-bold flex items-center gap-1">
+                                <Lock className="w-3 h-3" /> Privado
+                            </div>
+                        </div>
+                        
+                        <h3 className="text-xl font-bold text-white mb-1">{client.name}</h3>
+                        <p className="text-sm text-slate-500 mb-6">{client.description}</p>
+                        
+                        <div className="space-y-3">
+                            {client.portals.length > 0 ? (
+                                client.portals.map(portal => (
+                                    <a 
+                                        key={portal.id}
+                                        href={portal.url}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="block w-full py-3 px-4 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm text-slate-300 hover:text-white transition-colors flex items-center justify-between group-link"
+                                    >
+                                        <span className="truncate pr-2">{portal.name}</span>
+                                        <ArrowUpRight className="w-4 h-4 text-slate-500 group-link-hover:text-white" />
+                                    </a>
+                                ))
+                            ) : (
+                                <div className="text-xs text-slate-600 italic py-2">Acceso restringido o en configuración.</div>
+                            )}
+                        </div>
+                    </motion.div>
+                ))}
             </div>
-          </div>
+        </div>
+      </section>
+
+      {/* --- METHODOLOGY TEASER --- */}
+      <section className="py-24 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-bold text-white mb-8">¿Listo para transformar tu organización?</h2>
+            <Link to="/filosofia" className="inline-flex items-center text-cyan-400 hover:text-white font-bold text-lg transition-colors">
+                Conoce nuestra metodología <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
         </div>
       </section>
     </div>

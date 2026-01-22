@@ -1,5 +1,7 @@
 export type UserRole = 'admin' | 'client';
 
+export type ProductCategory = 'education' | 'creative' | 'corporate' | 'innovation';
+
 export interface Product {
   id: string;
   name: string;
@@ -7,8 +9,16 @@ export interface Product {
   description: string;
   features?: string[];
   imageUrl?: string;
-  url?: string; // Nuevo campo para enlace externo
+  url?: string;
   status: 'active' | 'beta' | 'development';
+  category: ProductCategory; // Nueva categorización estricta
+}
+
+export interface ClientPortal {
+  id: string;
+  name: string;
+  url: string;
+  type: 'management' | 'lms' | 'analytics';
 }
 
 export interface ClientCompany {
@@ -17,7 +27,8 @@ export interface ClientCompany {
   website?: string;
   logo?: string;
   description?: string;
-  assignedProducts: string[]; // IDs de productos asignados
+  portals: ClientPortal[]; // Los portales exclusivos del cliente
+  assignedProducts: string[]; // IDs de productos Aiwis asignados (ej: EduStudio)
 }
 
 export interface User {
@@ -25,7 +36,7 @@ export interface User {
   name: string;
   email: string;
   role: UserRole;
-  password?: string; // Solo para simulación de auth
-  companyId?: string; // Relación con ClientCompany
+  password?: string;
+  companyId?: string;
   avatar?: string;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { getUserProducts } from '../../data/mockData';
-import { ExternalLink, Rocket, Lock } from 'lucide-react';
+import { getUserProducts, getUserPortals } from '../../data/mockData';
+import { ExternalLink, Rocket, Lock, Layout, Star, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const ClientView: React.FC = () => {
@@ -9,80 +9,112 @@ const ClientView: React.FC = () => {
   
   if (!user) return null;
 
-  const myProducts = getUserProducts(user);
+  const myPortals = getUserPortals(user);
+  const myAiwisProducts = getUserProducts(user);
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-12">
       {/* Welcome Header */}
       <motion.div 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-slate-900 to-slate-800 p-8 rounded-2xl border border-slate-700"
+        className="bg-gradient-to-r from-slate-900 to-slate-800 p-8 rounded-2xl border border-slate-700 relative overflow-hidden"
       >
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+        <div className="absolute top-0 right-0 p-8 opacity-10">
+            <Rocket className="w-32 h-32 text-white" />
+        </div>
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 relative z-10">
           Hola, <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">{user.name}</span>
         </h1>
-        <p className="text-slate-400 text-lg">
-          Bienvenido a tu espacio de trabajo. Aquí están tus herramientas habilitadas.
+        <p className="text-slate-400 text-lg relative z-10 max-w-2xl">
+          Bienvenido a tu centro de comando. Accede a tus portales corporativos y herramientas de inteligencia artificial.
         </p>
       </motion.div>
 
-      {/* Products Grid */}
+      {/* SECTION 1: MY CORPORATE PORTALS */}
       <div>
-        <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-            <Rocket className="w-5 h-5 text-cyan-400" />
-            Mis Aplicaciones
+         <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2 border-l-4 border-cyan-500 pl-3">
+            <Layout className="w-5 h-5 text-cyan-400" />
+            Mis Portales Corporativos
+        </h2>
+
+        {myPortals.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {myPortals.map((portal, index) => (
+                    <motion.div
+                        key={portal.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="bg-slate-900 border border-slate-700 rounded-xl p-6 hover:border-cyan-500/50 transition-all group"
+                    >
+                        <div className="flex justify-between items-start mb-4">
+                            <div className="p-3 bg-cyan-900/20 rounded-lg text-cyan-400">
+                                <Layout className="w-8 h-8" />
+                            </div>
+                            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider bg-slate-950 px-2 py-1 rounded border border-slate-800">
+                                {portal.type}
+                            </span>
+                        </div>
+                        <h3 className="text-2xl font-bold text-white mb-2">{portal.name}</h3>
+                        <p className="text-slate-400 text-sm mb-6">Acceso seguro a tu entorno privado.</p>
+                        
+                        <a 
+                            href={portal.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-lg transition-all transform group-hover:scale-[1.02]"
+                        >
+                            Ingresar al Portal <ArrowRight className="ml-2 w-5 h-5" />
+                        </a>
+                    </motion.div>
+                ))}
+            </div>
+        ) : (
+            <div className="bg-slate-900/30 border border-slate-800 rounded-lg p-8 text-center">
+                <p className="text-slate-500">No tienes portales corporativos asignados.</p>
+            </div>
+        )}
+      </div>
+
+      {/* SECTION 2: ENABLED AIWIS TOOLS */}
+      <div>
+        <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2 border-l-4 border-purple-500 pl-3">
+            <Star className="w-5 h-5 text-purple-400" />
+            Herramientas Aiwis Habilitadas
         </h2>
         
-        {myProducts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {myProducts.map((product, index) => (
+        {myAiwisProducts.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {myAiwisProducts.map((product, index) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-                className="group relative bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-900/20"
+                transition={{ delay: 0.2 + (index * 0.1) }}
+                className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-purple-500/30 transition-all flex flex-col"
               >
-                {/* Product Card Content */}
-                <div className="p-6 h-full flex flex-col">
-                  <div className="mb-4">
-                    <span className={`inline-block px-2 py-1 text-xs rounded border ${
-                      product.status === 'beta' ? 'bg-yellow-900/20 text-yellow-400 border-yellow-900/50' :
-                      product.status === 'active' ? 'bg-green-900/20 text-green-400 border-green-900/50' :
-                      'bg-slate-800 text-slate-400 border-slate-700'
-                    }`}>
-                      {product.status.toUpperCase()}
+                <div className="p-5 flex flex-col flex-grow">
+                  <div className="mb-3">
+                    <span className="text-[10px] uppercase font-bold text-slate-500 bg-slate-950 px-2 py-1 rounded">
+                        {product.category}
                     </span>
                   </div>
+                  <h3 className="text-lg font-bold text-white mb-1">{product.name}</h3>
+                  <p className="text-purple-400 text-xs font-medium mb-3">{product.tagline}</p>
+                  <p className="text-slate-400 text-sm mb-4 line-clamp-3">{product.description}</p>
                   
-                  <h3 className="text-xl font-bold text-white mb-2">{product.name}</h3>
-                  <p className="text-cyan-400 text-sm font-medium mb-3">{product.tagline}</p>
-                  <p className="text-slate-400 text-sm mb-6 flex-grow">{product.description}</p>
-                  
-                  {/* Features Mini List */}
-                  {product.features && (
-                    <div className="mb-6 space-y-1">
-                        {product.features.slice(0, 3).map((feat, i) => (
-                            <div key={i} className="flex items-center text-xs text-slate-500">
-                                <span className="w-1 h-1 bg-slate-600 rounded-full mr-2"></span>
-                                {feat}
-                            </div>
-                        ))}
-                    </div>
-                  )}
-
-                  {product.url ? (
+                  {product.url && product.url !== '#' ? (
                     <a 
                       href={product.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full mt-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-cyan-600 text-white py-3 rounded-lg transition-colors font-medium group-hover:bg-cyan-600"
+                      className="mt-auto w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-purple-600 text-white py-2 rounded-lg transition-colors text-sm font-medium"
                     >
-                      Iniciar Aplicación <ExternalLink className="w-4 h-4" />
+                      Abrir Tool <ExternalLink className="w-3 h-3" />
                     </a>
                   ) : (
-                    <button disabled className="w-full mt-auto flex items-center justify-center gap-2 bg-slate-800/50 text-slate-500 py-3 rounded-lg font-medium cursor-not-allowed">
+                    <button disabled className="mt-auto w-full bg-slate-800/50 text-slate-500 py-2 rounded-lg text-sm font-medium cursor-not-allowed">
                        Próximamente
                     </button>
                   )}
@@ -91,10 +123,9 @@ const ClientView: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 bg-slate-900/50 rounded-xl border border-slate-800 border-dashed">
-             <Lock className="w-12 h-12 text-slate-600 mx-auto mb-4" />
-             <h3 className="text-lg font-medium text-slate-300">No tienes aplicaciones asignadas</h3>
-             <p className="text-slate-500">Contacta al administrador para habilitar servicios.</p>
+          <div className="text-center py-10 bg-slate-900/20 rounded-xl border border-slate-800 border-dashed">
+             <Lock className="w-8 h-8 text-slate-600 mx-auto mb-2" />
+             <p className="text-slate-500 text-sm">No tienes herramientas adicionales activas.</p>
           </div>
         )}
       </div>
