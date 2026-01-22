@@ -8,10 +8,10 @@ export interface Product {
   tagline: string;
   description: string;
   features?: string[];
-  imageUrl?: string;
+  imageUrl?: string; // Para futuras imagenes
   url?: string;
   status: 'active' | 'beta' | 'development';
-  category: ProductCategory; // Nueva categorización estricta
+  category: ProductCategory;
 }
 
 export interface ClientPortal {
@@ -25,7 +25,7 @@ export interface ClientCompany {
   id: string;
   name: string;
   website?: string;
-  logo?: string;
+  logo?: string; // Initials or URL
   description?: string;
   portals: ClientPortal[]; // Los portales exclusivos del cliente
   assignedProducts: string[]; // IDs de productos Aiwis asignados (ej: EduStudio)
@@ -36,7 +36,7 @@ export interface User {
   name: string;
   email: string;
   role: UserRole;
-  password?: string;
+  password?: string; // Opcional para demo users
   companyId?: string;
   avatar?: string;
 }

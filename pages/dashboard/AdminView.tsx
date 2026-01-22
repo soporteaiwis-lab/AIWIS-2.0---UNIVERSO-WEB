@@ -3,7 +3,7 @@ import { users as initialUsers, products as initialProducts, companies as initia
 import { Product, ClientCompany, ProductCategory } from '../../types';
 import { 
   Users, Box, DollarSign, Server, ExternalLink, Shield, Briefcase, 
-  Zap, Plus, Save, Link as LinkIcon, Trash2, Edit3, Check, X,
+  Zap, Plus, Save, Trash2, Edit3, Check, X,
   LayoutDashboard, Layers, Building2, Activity
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';

@@ -7,21 +7,21 @@ export const products: Product[] = [
     id: 'edustudio',
     name: 'Edu Studio Labs',
     category: 'education',
-    tagline: 'DAW Educativo Modular',
-    description: 'Plataforma educativa para realizar clases de música interactivas y estudio de grabación escolar.',
+    tagline: 'Plataforma Educativa Progresiva',
+    description: 'DAW Educativo Modular donde los alumnos cantan, tocan y componen. Integra Piano Roll y Rúbricas Mineduc automatizadas.',
     status: 'active',
     url: 'https://edustudio-modular-89422266816.us-west1.run.app',
-    features: ['Nivel Explorer, Maker & Pro', 'Cuaderno Digital', 'Rúbricas Mineduc']
+    features: ['Niveles: Explorer, Maker & Pro', 'Cuaderno Digital & Evaluación', 'Motor de Audio Web']
   },
   {
     id: 'aiwis-master-academy',
     name: 'AIWIS Master Academy',
     category: 'education',
-    tagline: 'Training Center Global',
-    description: 'Portal central de entrenamiento y adopción de Inteligencia Artificial.',
+    tagline: 'Centro de Entrenamiento Global',
+    description: 'Portal central de adopción de IA. Certificaciones y rutas de aprendizaje para docentes y directivos.',
     status: 'active',
     url: 'https://aiwis-training-portal-phase-2-ai-adoption-89422266816.us-west1.run.app',
-    features: ['Fase 2 Adopción', 'Certificaciones']
+    features: ['Ruta de Adopción', 'Certificación Docente']
   },
 
   // CATEGORÍA: CREATIVE (MÚSICA & ARTE)
@@ -29,21 +29,21 @@ export const products: Product[] = [
     id: 'armonia',
     name: 'ArmonIA Platform',
     category: 'creative',
-    tagline: 'Copiloto de Producción',
-    description: 'Investigación y diseño para potenciar a músicos integrando IA en sus flujos.',
+    tagline: 'Copiloto de Producción Híbrida',
+    description: 'Estudio de producción musical asistido por IA. Generación de Stems, análisis espectral y Suno Lab integration.',
     status: 'beta',
     url: 'https://copy-of-armonia-hub-v17-89422266816.us-west1.run.app',
-    features: ['Suno Lab Integration', 'Análisis Espectral', 'Toolbox Creativo']
+    features: ['Suno Lab Integration', 'Separación de Stems', 'Toolbox Creativo']
   },
   {
     id: 'chord-ia',
     name: 'Chord-IA',
     category: 'creative',
-    tagline: 'Análisis Armónico',
-    description: 'Analiza canciones y genera armonía de acordes en tiempo real.',
+    tagline: 'Análisis Armónico en Tiempo Real',
+    description: 'Herramienta de análisis musical que detecta acordes y estructuras armónicas instantáneamente.',
     status: 'active',
     url: 'https://copy-of-chord-ia-89422266816.us-west1.run.app',
-    features: ['Real-time Chords', 'Asistente de Ensayo']
+    features: ['Detección de Acordes', 'Asistente de Ensayo']
   },
   
   // CATEGORÍA: INNOVATION (I+D)
@@ -51,8 +51,8 @@ export const products: Product[] = [
     id: 'morpho-stereo',
     name: 'Morpho Stereo DSP',
     category: 'innovation',
-    tagline: 'Audio Espacial',
-    description: 'Prototipo de transformación de ondas de audio Mono a Stereo.',
+    tagline: 'Procesamiento de Audio Espacial',
+    description: 'Investigación en transformación de ondas de audio Mono a Stereo mediante algoritmos DSP.',
     status: 'development',
     url: 'https://morphostereo-dsp-prototype-89422266816.us-west1.run.app',
     features: ['DSP Processing', 'Mono to Stereo']
@@ -64,38 +64,38 @@ export const products: Product[] = [
     name: 'AIWIS Assistant',
     category: 'corporate',
     tagline: 'Soporte Inteligente 24/7',
-    description: 'Asistente virtual corporativo para gestión de consultas y soporte técnico.',
+    description: 'Agente de IA corporativo entrenado para soporte técnico y gestión de conocimiento organizacional.',
     status: 'development',
-    url: '#', // Placeholder
+    url: '#', 
     features: ['Soporte Nivel 1', 'Base de Conocimiento Dinámica']
   },
   {
     id: 'academy-developer',
     name: 'Academy Developer',
     category: 'corporate',
-    tagline: 'Constructor de Portales',
-    description: 'Plataforma para la creación y despliegue rápido de portales corporativos.',
+    tagline: 'Factory de Portales',
+    description: 'Infraestructura para el despliegue rápido de academias corporativas y sistemas LMS.',
     status: 'active',
     url: 'https://aiwis-master-portals-ia-89422266816.us-west1.run.app',
     features: ['Portal Builder', 'Gestión LMS']
   }
 ];
 
-// --- 2. CARTERA DE CLIENTES Y PORTALES EXCLUSIVOS ---
+// --- 2. CARTERA DE CLIENTES Y PORTALES EXCLUSIVOS (PARTNERS) ---
 export const companies: ClientCompany[] = [
   {
     id: 'aiwis-corp',
     name: 'AIWIS Corporation',
     website: 'https://www.aiwis.cl',
     description: 'Casa matriz. Acceso Total.',
-    portals: [], // Admin accede directo por Dashboard
-    assignedProducts: products.map(p => p.id) // Acceso a todos los productos propios
+    portals: [], 
+    assignedProducts: products.map(p => p.id) 
   },
   {
     id: 'simple-data-client',
     name: 'SimpleData',
     website: 'https://www.simpledata.cl',
-    description: 'Líderes en inteligencia de datos corporativos.',
+    description: 'Inteligencia de Datos y Estrategia Corporativa.',
     logo: 'SD',
     portals: [
       {
@@ -111,12 +111,12 @@ export const companies: ClientCompany[] = [
         url: 'https://simpledata-portal-89422266816.us-west1.run.app'
       }
     ],
-    assignedProducts: ['aiwis-assistant'] // Productos Aiwis que ellos usan
+    assignedProducts: ['aiwis-assistant'] 
   },
   {
     id: 'afri-client',
     name: 'AFRI',
-    description: 'Programa de adopción metodológica.',
+    description: 'Programa de adopción metodológica educativa.',
     logo: 'AF',
     portals: [
       {
@@ -131,7 +131,7 @@ export const companies: ClientCompany[] = [
   {
     id: 'ada-client',
     name: 'ADA',
-    description: 'Programa de adopción metodológica.',
+    description: 'Transformación digital y capacitación.',
     logo: 'AD',
     portals: [
       {
@@ -142,6 +142,22 @@ export const companies: ClientCompany[] = [
       }
     ],
     assignedProducts: []
+  },
+  // Cliente Demo Genérico
+  {
+    id: 'demo-partner',
+    name: 'Partner Demo',
+    description: 'Entorno de demostración para clientes potenciales.',
+    logo: 'PD',
+    portals: [
+        {
+            id: 'demo-portal',
+            name: 'Demo Corporate Portal',
+            type: 'management',
+            url: '#'
+        }
+    ],
+    assignedProducts: ['edustudio', 'armonia']
   }
 ];
 
@@ -164,17 +180,26 @@ export const users: User[] = [
     password: '1234', 
     companyId: 'simple-data-client',
     avatar: 'https://ui-avatars.com/api/?name=Simple+Data&background=f59e0b&color=fff'
+  },
+  // USUARIO DEMO SOLICITADO
+  {
+    id: 'user-demo-aiwis',
+    name: 'Usuario Demo AIWIS',
+    email: 'user.aiwis', // Login sin dominio completo para facilitar acceso
+    role: 'client',
+    password: '', // Sin password
+    companyId: 'demo-partner',
+    avatar: 'https://ui-avatars.com/api/?name=User+Demo&background=10b981&color=fff'
   }
 ];
 
-// Helper: Obtener productos Aiwis asignados al usuario
+// Helpers
 export const getUserProducts = (user: User): Product[] => {
   const company = companies.find(c => c.id === user.companyId);
   if (!company) return [];
   return products.filter(p => company.assignedProducts.includes(p.id));
 };
 
-// Helper: Obtener portales exclusivos del cliente
 export const getUserPortals = (user: User) => {
   const company = companies.find(c => c.id === user.companyId);
   if (!company) return [];

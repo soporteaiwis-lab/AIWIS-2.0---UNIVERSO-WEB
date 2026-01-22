@@ -18,17 +18,22 @@ const ClientView: React.FC = () => {
       <motion.div 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-slate-900 to-slate-800 p-8 rounded-2xl border border-slate-700 relative overflow-hidden"
+        className="bg-gradient-to-r from-slate-900 to-slate-800 p-8 rounded-2xl border border-slate-700 relative overflow-hidden shadow-2xl"
       >
         <div className="absolute top-0 right-0 p-8 opacity-10">
             <Rocket className="w-32 h-32 text-white" />
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 relative z-10">
-          Hola, <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">{user.name}</span>
-        </h1>
-        <p className="text-slate-400 text-lg relative z-10 max-w-2xl">
-          Bienvenido a tu centro de comando. Accede a tus portales corporativos y herramientas de inteligencia artificial.
-        </p>
+        <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-900/30 border border-cyan-500/20 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4">
+                <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></div> Partner Activo
+            </div>
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+            Hola, <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">{user.name}</span>
+            </h1>
+            <p className="text-slate-400 text-lg max-w-2xl">
+            Bienvenido a tu centro de comando. Accede a tus portales corporativos y herramientas de inteligencia artificial asignadas.
+            </p>
+        </div>
       </motion.div>
 
       {/* SECTION 1: MY CORPORATE PORTALS */}
@@ -46,10 +51,10 @@ const ClientView: React.FC = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className="bg-slate-900 border border-slate-700 rounded-xl p-6 hover:border-cyan-500/50 transition-all group"
+                        className="bg-slate-900 border border-slate-700 rounded-xl p-6 hover:border-cyan-500/50 transition-all group shadow-lg"
                     >
                         <div className="flex justify-between items-start mb-4">
-                            <div className="p-3 bg-cyan-900/20 rounded-lg text-cyan-400">
+                            <div className="p-3 bg-cyan-900/20 rounded-lg text-cyan-400 border border-cyan-500/10">
                                 <Layout className="w-8 h-8" />
                             </div>
                             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider bg-slate-950 px-2 py-1 rounded border border-slate-800">
@@ -57,13 +62,13 @@ const ClientView: React.FC = () => {
                             </span>
                         </div>
                         <h3 className="text-2xl font-bold text-white mb-2">{portal.name}</h3>
-                        <p className="text-slate-400 text-sm mb-6">Acceso seguro a tu entorno privado.</p>
+                        <p className="text-slate-400 text-sm mb-6">Entorno privado gestionado por Aiwis.</p>
                         
                         <a 
                             href={portal.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-lg transition-all transform group-hover:scale-[1.02]"
+                            className="inline-flex items-center justify-center w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-lg transition-all transform group-hover:scale-[1.02] shadow-lg shadow-cyan-900/20"
                         >
                             Ingresar al Portal <ArrowRight className="ml-2 w-5 h-5" />
                         </a>
@@ -92,15 +97,16 @@ const ClientView: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 + (index * 0.1) }}
-                className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-purple-500/30 transition-all flex flex-col"
+                className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-purple-500/30 transition-all flex flex-col group"
               >
-                <div className="p-5 flex flex-col flex-grow">
-                  <div className="mb-3">
-                    <span className="text-[10px] uppercase font-bold text-slate-500 bg-slate-950 px-2 py-1 rounded">
+                <div className="p-5 flex flex-col flex-grow relative">
+                  <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${product.category === 'creative' ? 'from-purple-500 to-pink-500' : 'from-blue-500 to-cyan-500'}`}></div>  
+                  <div className="mb-3 mt-2">
+                    <span className="text-[10px] uppercase font-bold text-slate-500 bg-slate-950 px-2 py-1 rounded border border-slate-800">
                         {product.category}
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-1">{product.name}</h3>
+                  <h3 className="text-lg font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors">{product.name}</h3>
                   <p className="text-purple-400 text-xs font-medium mb-3">{product.tagline}</p>
                   <p className="text-slate-400 text-sm mb-4 line-clamp-3">{product.description}</p>
                   
@@ -109,12 +115,12 @@ const ClientView: React.FC = () => {
                       href={product.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-auto w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-purple-600 text-white py-2 rounded-lg transition-colors text-sm font-medium"
+                      className="mt-auto w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white py-2 rounded-lg transition-colors text-sm font-medium border border-slate-700"
                     >
                       Abrir Tool <ExternalLink className="w-3 h-3" />
                     </a>
                   ) : (
-                    <button disabled className="mt-auto w-full bg-slate-800/50 text-slate-500 py-2 rounded-lg text-sm font-medium cursor-not-allowed">
+                    <button disabled className="mt-auto w-full bg-slate-800/50 text-slate-500 py-2 rounded-lg text-sm font-medium cursor-not-allowed border border-slate-800">
                        Próximamente
                     </button>
                   )}
